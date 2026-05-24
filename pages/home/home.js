@@ -1,6 +1,11 @@
 const api = require('../../utils/api.js');
 const app = getApp();
 
+const LEVEL_NAMES = ['', '蜜蜂学徒', '蜜蜂学徒', '蜜蜂学徒', '蜜蜂学徒', '蜜蜂学徒',
+                     '工蜂', '工蜂', '工蜂', '工蜂', '工蜂',
+                     '巡蜂', '巡蜂', '巡蜂', '巡蜂', '巡蜂', '巡蜂', '巡蜂', '巡蜂', '巡蜂', '巡蜂'];
+function levelName(level) { return LEVEL_NAMES[level] || '蜂王'; }
+
 Page({
   data: {
     stats: { level: 1, xp: 0, xp_max: 100, level_name: '蜜蜂学徒', xp_pct: 0, streak_current: 0, today_lesson_count: 0 },
@@ -32,7 +37,7 @@ Page({
         level: statsRaw.level,
         xp: statsRaw.xp,
         xp_max: statsRaw.xp_max,
-        level_name: statsRaw.level_band || '蜜蜂学徒',
+        level_name: levelName(statsRaw.level),
         xp_pct,
         streak_current: statsRaw.streak_current,
         today_lesson_count: statsRaw.today_lesson_count || 0,
