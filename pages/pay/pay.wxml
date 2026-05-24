@@ -1,0 +1,26 @@
+<view class="page">
+  <view class="head">
+    <view class="t">💰 选择套餐</view>
+    <view class="s">越多越划算 · 长期会员推荐月卡</view>
+  </view>
+
+  <view class="plan {{plan.recommended ? 'rec' : ''}}" wx:for="{{plans}}" wx:key="key" wx:for-item="plan" bindtap="pick" data-key="{{plan.key}}">
+    <view wx:if="{{plan.recommended}}" class="badge">最划算</view>
+    <view class="row" style="gap: 24rpx;">
+      <view class="icon" style="background: {{plan.iconBg}};">{{plan.icon}}</view>
+      <view class="flex-1">
+        <view class="p-name">{{plan.name}}</view>
+        <view class="p-desc">{{plan.desc}}</view>
+      </view>
+      <view style="text-align: right;">
+        <view wx:if="{{plan.oldPrice}}" class="p-old">¥{{plan.oldPrice}}</view>
+        <view class="p-price">¥{{plan.price}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="legal">
+    💳 微信安全支付 · 7 天无理由退款{'\n'}
+    V0 内测期暂未接入真实支付, 此页面仅样式预览
+  </view>
+</view>

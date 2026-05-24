@@ -1,0 +1,9 @@
+<view class="page">
+  <view class="bee-bob" style="font-size: 140rpx;">🐝</view>
+  <view class="t-main spin-dots">AI 老师正在批改</view>
+  <view class="t-sub">通常 10-30 秒</view>
+  <view class="prog-bar">
+    <view class="prog-fill" style="width: {{progress}}%;"></view>
+  </view>
+  <view class="t-sub">📷 → 🔍 → ✏️ → 📋</view>
+</view>

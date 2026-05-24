@@ -1,0 +1,146 @@
+/* app.wxss — 全局样式. 仿 study-tracker H5 蜂蜜黄 + 莫兰迪绿 */
+
+page {
+  background: linear-gradient(180deg, #FFFBEB 0%, #FAF7F2 100%);
+  min-height: 100vh;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #2c2c2c;
+  font-size: 28rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 24rpx rgba(180, 135, 30, 0.06);
+  padding: 32rpx;
+}
+
+.flex { display: flex; align-items: center; }
+.flex-1 { flex: 1; }
+.flex-col { display: flex; flex-direction: column; }
+.row { display: flex; align-items: center; }
+.grow { flex: 1; min-width: 0; }
+
+.txt-honey { color: #B45309; }
+.txt-sage { color: #52624A; }
+.txt-muted { color: #999; }
+.txt-bold { font-weight: 700; }
+.txt-sm { font-size: 24rpx; }
+.txt-xs { font-size: 20rpx; }
+.txt-lg { font-size: 32rpx; }
+.txt-xl { font-size: 40rpx; }
+
+.bg-honey { background: #FEF3C7; }
+.bg-warm { background: #FAF7F2; }
+.bg-sage { background: #DDE5D6; }
+
+.pill {
+  border-radius: 999rpx;
+  padding: 4rpx 16rpx;
+  font-size: 20rpx;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #FCD34D, #F59E0B);
+  color: #fff;
+  border-radius: 999rpx;
+  padding: 24rpx 48rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(245, 158, 11, .3);
+}
+.btn-primary[disabled] { opacity: .5; box-shadow: none; }
+
+.btn-ghost {
+  background: #FAF7F2;
+  color: #666;
+  border-radius: 16rpx;
+  padding: 20rpx 32rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.bee-bob {
+  display: inline-block;
+  animation: bob 2.4s ease-in-out infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12rpx); }
+}
+
+.spin-dots::after {
+  content: '...';
+  animation: dots 1.4s steps(4) infinite;
+}
+@keyframes dots {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+}
+
+/* 环形进度 */
+.ring-wrap {
+  position: relative;
+  width: 240rpx;
+  height: 240rpx;
+}
+.ring-wrap .center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 弱点卡片色带 */
+.weak-card {
+  position: relative;
+  border-radius: 24rpx;
+  padding: 28rpx 28rpx 28rpx 96rpx;
+  margin-bottom: 16rpx;
+}
+.weak-card.lv1 { background: linear-gradient(135deg, #FFE4E6, #FAF7F2); }
+.weak-card.lv2 { background: linear-gradient(135deg, #FEF3C7, #FAF7F2); }
+.weak-card .icon {
+  position: absolute;
+  left: 24rpx;
+  top: 24rpx;
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 28rpx;
+}
+.weak-card.lv1 .icon { background: linear-gradient(135deg, #fb7185, #f43f5e); }
+.weak-card.lv2 .icon { background: linear-gradient(135deg, #FCD34D, #F59E0B); }
+
+/* 任务卡 */
+.task-card {
+  display: flex;
+  gap: 20rpx;
+  background: #FAF7F2;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  margin-top: 16rpx;
+}
+.task-card .num {
+  flex-shrink: 0;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FCD34D, #F59E0B);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+}

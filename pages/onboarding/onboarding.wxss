@@ -1,0 +1,130 @@
+.page {
+  min-height: 100vh; background: #fff;
+  display: flex; flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* 顶部进度条 */
+.topbar {
+  padding: 100rpx 32rpx 16rpx;
+  display: flex; align-items: center; gap: 24rpx;
+}
+.close { font-size: 56rpx; color: #999; padding: 0 12rpx; line-height: 1; }
+.progress {
+  flex: 1; height: 16rpx; background: #F0EBE0;
+  border-radius: 999rpx; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, #FCD34D, #F59E0B);
+  transition: width .4s ease;
+}
+
+.screen {
+  flex: 1; display: flex; flex-direction: column;
+  padding: 24rpx 32rpx;
+}
+
+/* 蜜蜂 + 对话气泡 */
+.mascot-wrap {
+  display: flex; align-items: flex-start; gap: 16rpx;
+  padding: 16rpx 0 32rpx;
+}
+.mascot { font-size: 140rpx; line-height: 1; flex-shrink: 0; }
+.mascot.small { font-size: 100rpx; }
+.mascot.huge  { font-size: 200rpx; }
+.bubble {
+  flex: 1; background: #fff; border: 2rpx solid #F0EBE0;
+  border-radius: 24rpx; padding: 24rpx 28rpx;
+  font-size: 30rpx; color: #333; line-height: 1.6;
+  position: relative; align-self: center;
+}
+.bubble::before {
+  content: ''; position: absolute; left: -16rpx; top: 32rpx;
+  width: 0; height: 0;
+  border-top: 12rpx solid transparent;
+  border-bottom: 12rpx solid transparent;
+  border-right: 16rpx solid #F0EBE0;
+}
+.bubble::after {
+  content: ''; position: absolute; left: -12rpx; top: 32rpx;
+  width: 0; height: 0;
+  border-top: 12rpx solid transparent;
+  border-bottom: 12rpx solid transparent;
+  border-right: 16rpx solid #fff;
+}
+.br { height: 0; }
+
+/* 卖点行 */
+.sells { flex: 1; padding: 16rpx 0; }
+.sell-row { display: flex; align-items: center; gap: 24rpx; padding: 28rpx 0; }
+.sell-icon {
+  width: 80rpx; height: 80rpx; border-radius: 16rpx;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40rpx; flex-shrink: 0;
+}
+.sell-t { font-size: 32rpx; font-weight: 700; color: #333; }
+.sell-s { font-size: 24rpx; color: #888; margin-top: 6rpx; line-height: 1.5; }
+
+/* 选择卡片 */
+.choices { flex: 1; padding: 8rpx 0 0; }
+.choice {
+  display: flex; align-items: center; gap: 24rpx;
+  background: #fff; border: 4rpx solid #F0EBE0;
+  border-radius: 24rpx; padding: 24rpx;
+  margin-bottom: 16rpx;
+  transition: all .15s ease;
+}
+.choice.big { padding: 32rpx 28rpx; }
+.choice.selected {
+  border-color: #0ea5e9; background: #f0f9ff;
+}
+.badge {
+  width: 72rpx; height: 72rpx; border-radius: 16rpx;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 36rpx; font-weight: 700;
+  flex-shrink: 0;
+}
+.badge.big { width: 88rpx; height: 88rpx; font-size: 44rpx; }
+.choice-text { font-size: 30rpx; font-weight: 600; color: #333; }
+.choice-text.big { font-size: 34rpx; }
+.choice.selected .choice-text { color: #0369a1; }
+
+/* Final screen */
+.final-screen { align-items: center; justify-content: center; padding: 64rpx 40rpx; }
+.mascot-final {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 32rpx;
+}
+.bubble-final {
+  background: #fff; border: 2rpx solid #F0EBE0;
+  border-radius: 24rpx; padding: 24rpx 32rpx;
+  font-size: 32rpx; color: #333; line-height: 1.6;
+  text-align: center; position: relative;
+}
+.bubble-final::after {
+  content: ''; position: absolute; left: 50%; bottom: -16rpx; transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 16rpx solid transparent;
+  border-right: 16rpx solid transparent;
+  border-top: 16rpx solid #fff;
+}
+.bubble-final .hl { color: #B45309; font-weight: 700; }
+
+/* 底部 */
+.bottom {
+  padding: 24rpx 32rpx 48rpx;
+}
+.btn-continue {
+  width: 100%; background: linear-gradient(135deg, #FCD34D, #F59E0B);
+  color: #fff; border: none; padding: 32rpx;
+  border-radius: 24rpx; font-size: 34rpx; font-weight: 700;
+  box-shadow: 0 8rpx 24rpx rgba(245, 158, 11, .3);
+}
+.btn-continue[disabled] {
+  background: #E5E5E5; color: #999; box-shadow: none;
+}
+
+.error {
+  background: #FEE2E2; color: #B91C1C; font-size: 24rpx;
+  padding: 16rpx 20rpx; border-radius: 12rpx; margin-top: 16rpx;
+}

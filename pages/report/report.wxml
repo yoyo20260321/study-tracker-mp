@@ -1,0 +1,89 @@
+<view class="page" wx:if="{{!loading}}">
+
+  <!-- Hero: 环形进度 + 大五星 -->
+  <view class="card hero">
+    <view class="row" style="gap: 24rpx;">
+      <view class="ring-wrap">
+        <view class="ring" style="background: conic-gradient({{ringColor}} {{pct * 3.6}}deg, #F0EBE0 0deg);">
+          <view class="ring-inner">
+            <view class="num">{{correct}}<text class="den">/{{total}}</text></view>
+            <view class="pct">{{pct}}% 答对</view>
+          </view>
+        </view>
+      </view>
+      <view class="flex-1" style="min-width: 0;">
+        <view class="unit">{{meta.unit || '本次诊断'}}</view>
+        <view class="stars">
+          <text wx:for="{{[1,2,3,4,5]}}" wx:key="*this" class="{{item <= stars ? '' : 'dim'}}">⭐</text>
+        </view>
+        <view class="oneliner">{{meta.rating_one_liner}}</view>
+      </view>
+    </view>
+
+    <view class="dots-section" wx:if="{{total > 0}}">
+      <view class="dots-label">逐题对错</view>
+      <view class="dots">
+        <view wx:for="{{dots}}" wx:key="*this" class="dot {{item ? 'ok' : 'bad'}}">{{item ? '✓' : '✗'}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- XP 奖励 (mock) -->
+  <view class="card reward">
+    <view class="r-title">🎉 恭喜! 本次诊断获得</view>
+    <view class="row" style="justify-content: center; gap: 48rpx; margin-top: 16rpx;">
+      <view><text class="r-num xp">+{{xpEarned}}</text> <text class="r-lbl">⚡ XP</text></view>
+      <view><text class="r-num streak">+1</text> <text class="r-lbl">🔥 连击</text></view>
+    </view>
+  </view>
+
+  <!-- 弱点 -->
+  <view class="card" wx:if="{{report.weaknesses.length > 0}}">
+    <view class="row section-head">
+      <text>🔍 你最容易摔跤的地方</text>
+      <text class="hint">共 {{report.weaknesses.length}} 处</text>
+    </view>
+    <view class="weak-card lv{{index + 1}}" wx:for="{{report.weaknesses}}" wx:key="title" wx:for-index="index">
+      <view class="icon">{{index === 0 ? '🚨' : '⚠️'}}</view>
+      <view class="weak-title">{{item.title}}</view>
+      <view class="weak-exp">{{item.explanation}}</view>
+    </view>
+  </view>
+
+  <!-- 任务 -->
+  <view class="card" wx:if="{{report.next_week_plan.length > 0}}">
+    <view class="row section-head">
+      <text>🎮 下周你的小挑战</text>
+      <text class="hint">{{report.next_week_plan.length}} 关</text>
+    </view>
+    <view class="task-card" wx:for="{{report.next_week_plan}}" wx:key="*this" wx:for-index="ti">
+      <view class="num">{{taskIcons[ti] || '✨'}}</view>
+      <view class="grow">
+        <view class="row" style="gap: 8rpx; margin-bottom: 6rpx;">
+          <text class="pill" style="background:#FEF3C7;color:#B45309;">第 {{ti + 1}} 关</text>
+          <text wx:if="{{item.duration}}" class="pill" style="background:#DDE5D6;color:#52624A;">⏱ {{item.duration}}</text>
+        </view>
+        <view class="task-what">{{item.what}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 真心话 -->
+  <view class="card real" wx:if="{{report.real_problem}}">
+    <view class="r-tag">💪 跟你说句真心话</view>
+    <view class="r-body">{{report.real_problem}}</view>
+  </view>
+
+  <!-- 操作 -->
+  <view class="actions">
+    <button class="btn-share" open-type="share">📤 分享报告</button>
+    <button class="btn-chat" bindtap="goChat">💬 追问老师</button>
+  </view>
+
+  <view style="height: 32rpx;"></view>
+</view>
+
+<view wx:if="{{loading}}" class="loading-state">
+  <view class="bee-bob" style="font-size: 80rpx;">🐝</view>
+  <view class="t-sub spin-dots" style="margin-top: 24rpx;">加载报告</view>
+</view>

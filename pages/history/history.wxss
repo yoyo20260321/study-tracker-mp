@@ -1,0 +1,13 @@
+.page { padding: 24rpx; }
+.empty { text-align: center; padding: 48rpx; }
+.item { padding: 24rpx; margin-bottom: 16rpx; display: flex; align-items: center; gap: 20rpx; }
+.score-circle {
+  width: 72rpx; height: 72rpx; border-radius: 50%;
+  background: linear-gradient(135deg, #FCD34D, #F59E0B);
+  color: #fff; font-size: 24rpx; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.t1 { font-size: 28rpx; font-weight: 600; color: #333; }
+.t2 { font-size: 22rpx; color: #888; margin-top: 6rpx; }
+.stars-mini { font-size: 22rpx; }
+.stars-mini .dim { opacity: .2; filter: grayscale(1); }

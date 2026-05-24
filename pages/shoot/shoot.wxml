@@ -1,0 +1,36 @@
+<view class="page">
+  <view class="card tips">
+    <view style="font-size: 80rpx;">📐</view>
+    <view class="t-title">拍卷小贴士</view>
+    <view class="t-body">
+      📐 试卷正放, 不要横躺{'\n'}
+      💡 光线足, 不要逆光{'\n'}
+      📏 距离 30cm 左右
+    </view>
+  </view>
+
+  <view class="grid">
+    <button class="btn-action camera" bindtap="chooseFromCamera">
+      <view style="font-size: 64rpx;">📸</view>
+      <view>微信拍照</view>
+    </button>
+    <button class="btn-action album" bindtap="chooseFromAlbum">
+      <view style="font-size: 64rpx;">🖼️</view>
+      <view>从相册选</view>
+    </button>
+  </view>
+
+  <view class="card form">
+    <view class="row" style="justify-content: space-between; margin-bottom: 16rpx;">
+      <text class="txt-sage txt-bold">📝 选择学段 / 科目</text>
+    </view>
+    <view class="row" style="gap: 16rpx;">
+      <picker class="picker flex-1" mode="selector" range="{{grades}}" value="{{gradeIdx}}" bindchange="onGradeChange">
+        <view class="picker-view">{{grades[gradeIdx]}}</view>
+      </picker>
+      <picker class="picker flex-1" mode="selector" range="{{subjects}}" value="{{subjectIdx}}" bindchange="onSubjectChange">
+        <view class="picker-view">{{subjects[subjectIdx]}}</view>
+      </picker>
+    </view>
+  </view>
+</view>

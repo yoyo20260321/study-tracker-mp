@@ -1,0 +1,67 @@
+.page { padding: 24rpx; }
+.card { margin-bottom: 24rpx; }
+.hero { padding: 32rpx; }
+
+.ring {
+  width: 240rpx; height: 240rpx; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.ring-inner {
+  width: 180rpx; height: 180rpx; background: #fff; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.ring-inner .num { font-size: 44rpx; font-weight: 700; color: #333; line-height: 1; }
+.ring-inner .den { font-size: 26rpx; color: #888; font-weight: 400; }
+.ring-inner .pct { font-size: 20rpx; color: #888; margin-top: 8rpx; }
+
+.unit { font-size: 22rpx; color: #aaa; }
+.stars { font-size: 36rpx; margin-top: 8rpx; }
+.stars .dim { opacity: .2; filter: grayscale(1); }
+.oneliner { font-size: 24rpx; color: #555; line-height: 1.6; margin-top: 8rpx; }
+
+.dots-section { margin-top: 24rpx; padding-top: 20rpx; border-top: 1rpx solid #F0EBE0; }
+.dots-label { font-size: 20rpx; color: #aaa; margin-bottom: 12rpx; }
+.dots { display: flex; flex-wrap: wrap; gap: 10rpx; }
+.dot {
+  width: 44rpx; height: 44rpx; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22rpx; font-weight: 700;
+}
+.dot.ok { background: #D1FAE5; color: #059669; }
+.dot.bad { background: #FFE4E6; color: #fb7185; }
+
+.reward { padding: 24rpx; text-align: center; background: linear-gradient(135deg, #FEF3C7, #FFFBEB); }
+.r-title { font-size: 26rpx; font-weight: 600; color: #B45309; }
+.r-num { font-size: 48rpx; font-weight: 700; }
+.r-num.xp { color: #F59E0B; }
+.r-num.streak { color: #fb7185; }
+.r-lbl { font-size: 22rpx; color: #888; margin-left: 8rpx; }
+
+.section-head {
+  font-size: 28rpx; font-weight: 700; color: #52624A;
+  justify-content: space-between; margin-bottom: 16rpx;
+}
+.section-head .hint { font-size: 20rpx; color: #999; font-weight: 400; }
+
+.weak-title { font-size: 26rpx; font-weight: 600; color: #333; line-height: 1.5; }
+.weak-exp { font-size: 22rpx; color: #666; line-height: 1.7; margin-top: 8rpx; }
+
+.task-what { font-size: 26rpx; color: #333; line-height: 1.6; }
+
+.real { padding: 28rpx; background: linear-gradient(135deg, #FEF3C7, #FFFBEB); }
+.r-tag { font-size: 20rpx; font-weight: 700; color: #B45309; letter-spacing: 2rpx; margin-bottom: 8rpx; }
+.r-body { font-size: 26rpx; color: #B45309; font-weight: 500; line-height: 1.7; }
+
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 16rpx; margin-top: 24rpx; }
+.btn-share, .btn-chat {
+  color: #fff; border: none; padding: 24rpx 0; border-radius: 20rpx;
+  font-size: 26rpx; font-weight: 500;
+}
+.btn-share { background: #07C160; }
+.btn-chat  { background: #F59E0B; }
+
+.loading-state {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.t-sub { font-size: 24rpx; color: #888; }

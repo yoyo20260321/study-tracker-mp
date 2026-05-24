@@ -1,0 +1,28 @@
+<view class="page {{perfect ? 'perfect' : 'normal'}}">
+  <view class="hero">
+    <view class="bee-bob" style="font-size: 140rpx;">{{perfect ? '🐝' : '🍯'}}</view>
+    <view class="title">{{perfect ? '完美通关!' : '搞定这一关!'}}</view>
+    <view class="subtitle">你刚刚答对了 {{correct}} / {{total}} 题</view>
+  </view>
+
+  <view class="rewards">
+    <view class="reward-card">
+      <view class="rw-num xp">+{{xp}}</view>
+      <view class="rw-lbl">⚡ XP</view>
+    </view>
+    <view class="reward-card">
+      <view class="rw-num streak">{{streak}} 🔥</view>
+      <view class="rw-lbl">连击 (+1 天)</view>
+    </view>
+    <view class="reward-card" wx:if="{{perfect}}">
+      <view class="rw-num bonus">+50</view>
+      <view class="rw-lbl">🏅 全对奖励</view>
+    </view>
+  </view>
+
+  <view class="bottom">
+    <button class="btn-primary-big" bindtap="again">🔁 再来一关</button>
+    <button class="btn-secondary" bindtap="goBack">回到课程</button>
+    <button class="btn-share" open-type="share">📤 分享给好友, 互相 PK 连击</button>
+  </view>
+</view>

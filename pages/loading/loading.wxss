@@ -1,0 +1,14 @@
+.page {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 64rpx;
+}
+.t-main { font-size: 32rpx; font-weight: 600; color: #B45309; margin-top: 48rpx; }
+.t-sub { font-size: 24rpx; color: #888; margin-top: 16rpx; }
+.prog-bar {
+  width: 400rpx; height: 12rpx; background: #FEF3C7;
+  border-radius: 999rpx; overflow: hidden; margin: 64rpx 0 32rpx;
+}
+.prog-fill {
+  height: 100%; background: linear-gradient(90deg, #FCD34D, #F59E0B);
+  transition: width .8s linear;
+}

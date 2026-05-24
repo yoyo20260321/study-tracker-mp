@@ -1,0 +1,99 @@
+.page {
+  min-height: 100vh; display: flex; flex-direction: column;
+  background: #fff; padding: 32rpx 32rpx 0;
+  box-sizing: border-box;
+}
+
+/* 顶部 */
+.topbar {
+  padding-top: 100rpx;   /* iPhone 状态栏占位 (custom navigationStyle) */
+  display: flex; align-items: center; gap: 24rpx;
+}
+.close { font-size: 48rpx; color: #999; padding: 12rpx; line-height: 1; }
+.progress {
+  flex: 1; height: 16rpx; background: #F0EBE0;
+  border-radius: 999rpx; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, #FCD34D, #F59E0B);
+  transition: width .3s ease;
+}
+.hearts { font-size: 28rpx; color: #B45309; font-weight: 700; }
+
+/* 题面 */
+.stem-wrap { padding: 64rpx 0 32rpx; }
+.stem-tag {
+  font-size: 22rpx; color: #999; margin-bottom: 16rpx;
+  letter-spacing: 2rpx; text-transform: uppercase;
+}
+.stem {
+  font-size: 38rpx; font-weight: 600; color: #333; line-height: 1.5;
+}
+
+/* 单选选项 */
+.options { display: flex; flex-direction: column; gap: 16rpx; }
+.opt {
+  display: flex; align-items: center; gap: 20rpx;
+  background: #fff; border: 4rpx solid #E5E5E5;
+  border-radius: 20rpx; padding: 24rpx;
+  transition: all .15s ease;
+}
+.opt.selected { border-color: #0ea5e9; background: #f0f9ff; }
+.opt.correct  { border-color: #10b981; background: #f0fdf4; }
+.opt.wrong    { border-color: #ef4444; background: #fef2f2; }
+
+.opt-letter {
+  width: 56rpx; height: 56rpx; border-radius: 16rpx;
+  background: #F0EBE0; color: #888;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28rpx; font-weight: 700; flex-shrink: 0;
+}
+.opt.selected .opt-letter { background: #0ea5e9; color: #fff; }
+.opt.correct  .opt-letter { background: #10b981; color: #fff; }
+.opt.wrong    .opt-letter { background: #ef4444; color: #fff; }
+
+.opt-text { font-size: 30rpx; color: #333; }
+
+/* 填空 */
+.fill-wrap { padding: 16rpx 0; }
+.fill-input {
+  background: #FAF7F2; border-radius: 20rpx;
+  padding: 32rpx; font-size: 36rpx; text-align: center;
+  border: 4rpx solid transparent;
+}
+
+/* 答案揭示 */
+.reveal {
+  margin-top: 32rpx; padding: 24rpx;
+  border-radius: 20rpx;
+}
+.reveal.ok { background: #f0fdf4; border-left: 8rpx solid #10b981; }
+.reveal.no { background: #fef2f2; border-left: 8rpx solid #ef4444; }
+.reveal-head { display: flex; align-items: center; gap: 12rpx; }
+.reveal-emoji { font-size: 40rpx; }
+.reveal-title { font-size: 30rpx; font-weight: 700; flex: 1; }
+.reveal.ok .reveal-title { color: #059669; }
+.reveal.no .reveal-title { color: #dc2626; }
+.reveal-xp { font-size: 24rpx; color: #B45309; font-weight: 700; }
+.reveal-answer { margin-top: 12rpx; font-size: 26rpx; color: #555; }
+.reveal-answer .ans { color: #059669; font-weight: 700; }
+.reveal-exp {
+  margin-top: 12rpx; font-size: 24rpx; color: #666; line-height: 1.6;
+  background: rgba(255,255,255,.5); padding: 12rpx 16rpx; border-radius: 12rpx;
+}
+
+/* 底部 */
+.bottom { padding: 24rpx 0 48rpx; }
+.btn-check, .btn-next {
+  width: 100%; border: none; padding: 28rpx;
+  border-radius: 24rpx; font-size: 32rpx; font-weight: 700;
+}
+.btn-check {
+  background: linear-gradient(135deg, #FCD34D, #F59E0B); color: #fff;
+  box-shadow: 0 8rpx 24rpx rgba(245, 158, 11, .3);
+}
+.btn-check[disabled] {
+  background: #E5E5E5; color: #999; box-shadow: none;
+}
+.btn-next.ok { background: #10b981; color: #fff; box-shadow: 0 8rpx 24rpx rgba(16, 185, 129, .3); }
+.btn-next.no { background: #ef4444; color: #fff; box-shadow: 0 8rpx 24rpx rgba(239, 68, 68, .3); }

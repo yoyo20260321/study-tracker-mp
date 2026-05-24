@@ -1,0 +1,127 @@
+<view class="page">
+
+  <!-- 顶部进度 + 关闭 -->
+  <view class="topbar">
+    <view class="close" wx:if="{{step > 0}}" bindtap="prevStep">‹</view>
+    <view class="close" wx:else bindtap="quit">✕</view>
+    <view class="progress">
+      <view class="progress-fill" style="width: {{(step + 1) * 20}}%;"></view>
+    </view>
+  </view>
+
+  <!-- Step 0 · 介绍 -->
+  <view wx:if="{{step === 0}}" class="screen">
+    <view class="mascot-wrap">
+      <view class="bee-bob mascot">🐝</view>
+      <view class="bubble">嗨, 我是蜂学老师!<view class="br"></view>开通课程, 每天 2 分钟变学霸 ~</view>
+    </view>
+
+    <view class="sells">
+      <view class="sell-row">
+        <view class="sell-icon" style="background: #FEF3C7;">📸</view>
+        <view class="sell-text">
+          <view class="sell-t">拍卷秒诊断</view>
+          <view class="sell-s">一张照片, 30 秒看到你哪里弱</view>
+        </view>
+      </view>
+      <view class="sell-row">
+        <view class="sell-icon" style="background: #DDE5D6;">🎯</view>
+        <view class="sell-text">
+          <view class="sell-t">每日小单元</view>
+          <view class="sell-s">5 题打卡, 跟自己比进步</view>
+        </view>
+      </view>
+      <view class="sell-row">
+        <view class="sell-icon" style="background: #FFE4E6;">🎮</view>
+        <view class="sell-text">
+          <view class="sell-t">升级打怪不无聊</view>
+          <view class="sell-s">攒经验值, 解锁等级, 邀好友 PK 连击</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="bottom">
+      <button class="btn-continue" bindtap="nextStep">继续</button>
+    </view>
+  </view>
+
+  <!-- Step 1 · 年级 -->
+  <view wx:if="{{step === 1}}" class="screen">
+    <view class="mascot-wrap">
+      <view class="bee-bob mascot small">🐝</view>
+      <view class="bubble">你上几年级了?</view>
+    </view>
+
+    <view class="choices">
+      <view wx:for="{{grades}}" wx:key="value"
+            class="choice {{form.grade === item.value ? 'selected' : ''}}"
+            bindtap="pickGrade" data-v="{{item.value}}">
+        <view class="badge" style="background: {{item.color}};">{{item.num}}</view>
+        <view class="choice-text">{{item.value}}</view>
+      </view>
+    </view>
+
+    <view class="bottom">
+      <button class="btn-continue" bindtap="nextStep" disabled="{{!form.grade}}">继续</button>
+    </view>
+  </view>
+
+  <!-- Step 2 · 学段大类 -->
+  <view wx:if="{{step === 2}}" class="screen">
+    <view class="mascot-wrap">
+      <view class="bee-bob mascot small">🐝</view>
+      <view class="bubble">你现在处于哪个学习阶段?</view>
+    </view>
+
+    <view class="choices">
+      <view wx:for="{{bands}}" wx:key="value"
+            class="choice big {{form.band === item.value ? 'selected' : ''}}"
+            bindtap="pickBand" data-v="{{item.value}}">
+        <view class="badge big" style="background: {{item.color}};">{{item.icon}}</view>
+        <view class="choice-text big">{{item.value}}</view>
+      </view>
+    </view>
+
+    <view class="bottom">
+      <button class="btn-continue" bindtap="nextStep" disabled="{{!form.band}}">继续</button>
+    </view>
+  </view>
+
+  <!-- Step 3 · 学习目标 -->
+  <view wx:if="{{step === 3}}" class="screen">
+    <view class="mascot-wrap">
+      <view class="bee-bob mascot small">🐝</view>
+      <view class="bubble">你想达到啥目标?</view>
+    </view>
+
+    <view class="choices">
+      <view wx:for="{{goals}}" wx:key="value"
+            class="choice big {{form.goal === item.value ? 'selected' : ''}}"
+            bindtap="pickGoal" data-v="{{item.value}}">
+        <view class="badge big" style="background: {{item.color}};">{{item.icon}}</view>
+        <view class="choice-text big">{{item.text}}</view>
+      </view>
+    </view>
+
+    <view class="bottom">
+      <button class="btn-continue" bindtap="nextStep" disabled="{{!form.goal}}">继续</button>
+    </view>
+  </view>
+
+  <!-- Step 4 · 准备开始首关 -->
+  <view wx:if="{{step === 4}}" class="screen final-screen">
+    <view style="flex: 1;"></view>
+    <view class="mascot-final">
+      <view class="bubble-final">好嘞! 可以开始你的首个<text class="hl">2 分钟</text>小单元啦 ~</view>
+      <view class="bee-bob mascot huge">🐝</view>
+    </view>
+    <view style="flex: 1;"></view>
+
+    <view class="bottom">
+      <button class="btn-continue" bindtap="finish" disabled="{{saving}}">
+        {{saving ? '保存中...' : '开始首关 🚀'}}
+      </button>
+      <view class="error" wx:if="{{error}}">{{error}}</view>
+    </view>
+  </view>
+</view>

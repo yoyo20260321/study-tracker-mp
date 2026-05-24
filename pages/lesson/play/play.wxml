@@ -1,0 +1,51 @@
+<view class="page">
+
+  <!-- 顶部: 进度条 + 关闭 -->
+  <view class="topbar">
+    <view class="close" bindtap="confirmQuit">✕</view>
+    <view class="progress">
+      <view class="progress-fill" style="width: {{(idx / total) * 100}}%;"></view>
+    </view>
+    <view class="hearts" wx:if="{{streak > 0}}">🔥{{streak}}</view>
+  </view>
+
+  <!-- 题面 -->
+  <view class="stem-wrap">
+    <view class="stem-tag" wx:if="{{question.tag}}">{{question.tag}}</view>
+    <view class="stem">{{question.stem}}</view>
+  </view>
+
+  <!-- 单选 -->
+  <view class="options" wx:if="{{question.type === 'single_choice'}}">
+    <view wx:for="{{question.options}}" wx:key="*this" wx:for-item="opt" wx:for-index="optIdx"
+          class="opt {{selected === optIdx ? 'selected' : ''}} {{revealed && answerText === opt ? 'correct' : ''}} {{revealed && selected === optIdx && answerText !== opt ? 'wrong' : ''}}"
+          bindtap="pickOption" data-i="{{optIdx}}">
+      <view class="opt-letter">{{letters[optIdx]}}</view>
+      <view class="opt-text">{{opt}}</view>
+    </view>
+  </view>
+
+  <!-- 填空 -->
+  <view class="fill-wrap" wx:if="{{question.type === 'fill_blank'}}">
+    <input class="fill-input" placeholder="输入你的答案" value="{{fillAnswer}}" bindinput="onFillInput" disabled="{{revealed}}" focus="{{!revealed}}"/>
+  </view>
+
+  <!-- 答案揭示 -->
+  <view wx:if="{{revealed}}" class="reveal {{isCorrect ? 'ok' : 'no'}}">
+    <view class="reveal-head">
+      <text class="reveal-emoji">{{isCorrect ? '🎉' : '🐝'}}</text>
+      <text class="reveal-title">{{isCorrect ? '答对了!' : '差一点'}}</text>
+      <text class="reveal-xp">+{{lastXp}} ⚡</text>
+    </view>
+    <view wx:if="{{!isCorrect}}" class="reveal-answer">正确答案: <text class="ans">{{answerText}}</text></view>
+    <view wx:if="{{explanation}}" class="reveal-exp">{{explanation}}</view>
+  </view>
+
+  <view style="flex: 1;"></view>
+
+  <!-- 底部胖按钮 -->
+  <view class="bottom">
+    <button wx:if="{{!revealed}}" class="btn-check" bindtap="check" disabled="{{!canCheck}}">检查</button>
+    <button wx:else class="btn-next {{isCorrect ? 'ok' : 'no'}}" bindtap="nextQuestion">{{idx < total - 1 ? '下一题' : '看结果 🎯'}}</button>
+  </view>
+</view>

@@ -1,0 +1,60 @@
+<view class="page">
+
+  <!-- 顶部状态 -->
+  <view class="card head">
+    <view class="row" style="justify-content: space-between; align-items: center;">
+      <view class="row" style="gap: 12rpx;">
+        <text class="emoji">🔥</text>
+        <view>
+          <view class="big">{{stats.streak_current}} 天</view>
+          <view class="sm">连击</view>
+        </view>
+      </view>
+      <view class="row" style="gap: 12rpx;">
+        <text class="emoji">⚡</text>
+        <view>
+          <view class="big">{{stats.xp}}</view>
+          <view class="sm">XP · Lv.{{stats.level}}</view>
+        </view>
+      </view>
+      <view class="row" style="gap: 12rpx;" wx:if="{{stats.streak_freezes > 0}}">
+        <text class="emoji">🛡</text>
+        <view>
+          <view class="big">{{stats.streak_freezes}}</view>
+          <view class="sm">保护卡</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 今日推荐 (P3 联动会替换为基于诊断的) -->
+  <view class="section-t" wx:if="{{recommend}}">📍 今日推荐 (适合你年级的)</view>
+  <view class="card recommend" wx:if="{{recommend}}" bindtap="goPlay" data-id="{{recommend.id}}">
+    <view class="row" style="gap: 20rpx;">
+      <view class="topic-icon" style="background: {{recommend.color}};">{{recommend.icon}}</view>
+      <view class="flex-1">
+        <view class="t-name">{{recommend.name}}</view>
+        <view class="t-meta">{{recommend.grade}} · {{recommend.total}} 题 · 约 2 分钟</view>
+      </view>
+      <view class="go-btn">开始 ›</view>
+    </view>
+  </view>
+
+  <!-- 全部知识点 -->
+  <view class="section-t">📚 全部小单元</view>
+  <view class="card topic-item" wx:for="{{topics}}" wx:key="id" bindtap="goPlay" data-id="{{item.id}}">
+    <view class="row" style="gap: 16rpx;">
+      <view class="topic-icon small" style="background: {{item.color}};">{{item.icon}}</view>
+      <view class="flex-1">
+        <view class="t-name">{{item.name}}</view>
+        <view class="t-meta-sm">{{item.grade}} · 已做 {{item.done}}/{{item.total}} 题</view>
+      </view>
+      <view wx:if="{{item.locked}}" class="locked">🔒</view>
+      <view wx:else class="prog-mini">
+        <view class="prog-fill-mini" style="width: {{item.pct}}%;"></view>
+      </view>
+    </view>
+  </view>
+
+  <view style="height: 32rpx;"></view>
+</view>

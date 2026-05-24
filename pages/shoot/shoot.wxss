@@ -1,0 +1,19 @@
+.page { padding: 24rpx; }
+.tips { text-align: center; padding: 40rpx 32rpx; }
+.t-title { font-size: 28rpx; font-weight: 700; color: #333; margin-top: 16rpx; }
+.t-body { font-size: 24rpx; color: #888; line-height: 1.8; margin-top: 16rpx; white-space: pre-line; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24rpx; margin-top: 24rpx; }
+.btn-action {
+  color: #fff; border-radius: 32rpx; padding: 64rpx 0;
+  text-align: center; font-size: 28rpx; font-weight: 600; border: none;
+}
+.btn-action.camera { background: #F59E0B; }
+.btn-action.album  { background: #7A8C70; }
+
+.form { margin-top: 24rpx; }
+.picker {
+  background: #FAF7F2; border-radius: 16rpx;
+  padding: 16rpx 24rpx; font-size: 26rpx;
+}
+.picker-view { line-height: 48rpx; }

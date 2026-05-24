@@ -1,0 +1,76 @@
+<view class="page">
+
+  <!-- 状态栏: Lv + XP + streak + 剩余次数 -->
+  <view class="card stats">
+    <view class="row" style="gap: 20rpx;">
+      <view class="lv-circle">L{{stats.level}}</view>
+      <view class="grow">
+        <view class="lv-name">{{stats.level_name}}</view>
+        <view class="row" style="gap: 12rpx; margin-top: 8rpx;">
+          <view class="xp-bar">
+            <view class="xp-fill" style="width: {{stats.xp_pct}}%;"></view>
+          </view>
+          <view class="xp-text">{{stats.xp}}/{{stats.xp_max}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="row stat-row">
+      <view class="stat-cell warm">
+        <view class="emoji">🔥</view>
+        <view class="txt">连击 {{stats.streak}} 天</view>
+      </view>
+      <view class="stat-cell sage">
+        <view class="emoji">🎫</view>
+        <view class="txt">剩 {{stats.remaining}} 次</view>
+      </view>
+      <view class="stat-cell honey" bindtap="goPay">
+        <view class="emoji">💰</view>
+        <view class="txt">充值</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 大拍卷 CTA -->
+  <view class="card cta">
+    <view class="bee-bob" style="font-size: 110rpx;">🐝</view>
+    <view class="cta-title">拍张试卷, 30 秒出诊断</view>
+    <view class="cta-sub">支持一年级到初三 · 数学</view>
+    <button class="btn-primary" style="margin-top: 32rpx;" bindtap="goShoot">📸 立刻拍卷</button>
+  </view>
+
+  <!-- 弱点聚合 -->
+  <view class="card" wx:if="{{weaknesses.length > 0}}">
+    <view class="row section-head">
+      <text>📍 你最该突破的</text>
+      <text class="hint">近 5 次诊断聚合</text>
+    </view>
+    <block wx:for="{{weaknesses}}" wx:key="tag">
+      <view class="weak-row {{item.recent ? 'recent' : ''}}">
+        <view class="weak-num">{{index + 1}}</view>
+        <view class="grow">
+          <view class="weak-tag">{{item.tag}}</view>
+          <view class="weak-cnt">最近 {{item.count}} 次都摔在这</view>
+        </view>
+        <view wx:if="{{item.recent}}" class="pill" style="background:#fb7185;color:#fff;">本周</view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 蜂力值曲线 -->
+  <view class="card" wx:if="{{history.length > 1}}">
+    <view class="row section-head">
+      <text>📊 蜂力值曲线</text>
+      <text class="hint">近 {{history.length}} 次</text>
+    </view>
+    <view class="chart-wrap">
+      <view class="chart-bar" wx:for="{{history}}" wx:key="date" style="height: {{(item.score - 50) * 3}}rpx;">
+        <view class="bar-val">{{item.score}}</view>
+      </view>
+    </view>
+    <view class="chart-x">
+      <text wx:for="{{history}}" wx:key="*this" wx:for-item="h">{{h.date}}</text>
+    </view>
+  </view>
+
+  <view style="height: 32rpx;"></view>
+</view>

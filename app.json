@@ -1,0 +1,65 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/lesson/topics/topics",
+    "pages/lesson/play/play",
+    "pages/lesson/result/result",
+    "pages/onboarding/onboarding",
+    "pages/login/login",
+    "pages/shoot/shoot",
+    "pages/confirm/confirm",
+    "pages/loading/loading",
+    "pages/report/report",
+    "pages/history/history",
+    "pages/me/me",
+    "pages/profile/profile",
+    "pages/pay/pay"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FFFBEB",
+    "navigationBarTitleText": "蜂学",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FFFBEB"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#B45309",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/lesson/topics/topics",
+        "text": "课程",
+        "iconPath": "images/tab-lesson.png",
+        "selectedIconPath": "images/tab-lesson-active.png"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "历史",
+        "iconPath": "images/tab-history.png",
+        "selectedIconPath": "images/tab-history-active.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath": "images/tab-me.png",
+        "selectedIconPath": "images/tab-me-active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于推荐附近教育资源 (V1 暂未启用)"
+    }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}
