@@ -51,6 +51,23 @@ Page({
       wx.setStorageSync('token', resp.token);
       wx.setStorageSync('user', app.globalData.user);
       wx.showToast({ title: '登录成功', icon: 'success' });
+
+      // P4: 处理邀请 ref
+      const pendingRef = wx.getStorageSync('pending_ref');
+      if (pendingRef) {
+        try {
+          await api.referralsTrack(pendingRef);
+          wx.removeStorageSync('pending_ref');
+          wx.showModal({
+            title: '🎉 和好友一起开蒙啦!',
+            content: '各 +50 XP + 1 🛡 保护卡',
+            showCancel: false,
+          });
+        } catch {
+          wx.removeStorageSync('pending_ref');
+        }
+      }
+
       // 检查 profile 是否完整, 缺则引导填
       try {
         const me = await api.me();

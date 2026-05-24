@@ -14,6 +14,7 @@ Page({
     ringColor: '#F59E0B',
     xpEarned: 0,
     taskIcons: ['🎯', '🧩', '⚡'],
+    recommendations: [],
   },
 
   onLoad(opt) {
@@ -23,8 +24,14 @@ Page({
 
   async load() {
     try {
-      const data = await api.report(this.data.reportId);
-      const report = data.report || data;
+      const [data, recData] = await Promise.allSettled([
+        api.report(this.data.reportId),
+        api.recommendations(this.data.reportId),
+      ]);
+
+      if (data.status === 'rejected') throw data.reason;
+
+      const report = data.value.report || data.value;
       const meta = report.meta || {};
       const total = Number(meta.total_questions) || 0;
       const correct = Number(meta.correct_count) || 0;
@@ -33,6 +40,9 @@ Page({
       const dots = Array.from({ length: total }, (_, i) => i < correct);
       const ringColor = pct >= 90 ? '#10b981' : pct >= 75 ? '#F59E0B' : '#fb7185';
       const xpEarned = 50 + (pct >= 90 ? 100 : Math.round(pct));
+      const recommendations = recData.status === 'fulfilled'
+        ? (recData.value.recommendations || [])
+        : [];
 
       this.setData({
         loading: false,
@@ -42,13 +52,18 @@ Page({
           next_week_plan: report.next_week_plan || [],
           real_problem: report.real_problem || '',
         },
-        meta, total, correct, pct, stars, dots, ringColor, xpEarned,
+        meta, total, correct, pct, stars, dots, ringColor, xpEarned, recommendations,
       });
       wx.setNavigationBarTitle({ title: meta.unit || '诊断报告' });
     } catch (err) {
       wx.showModal({ title: '加载失败', content: err.message, showCancel: false });
       this.setData({ loading: false });
     }
+  },
+
+  goTopic(e) {
+    const topicId = e.currentTarget.dataset.topicId;
+    wx.navigateTo({ url: `/pages/lesson/play/play?topic=${topicId}` });
   },
 
   goChat() {

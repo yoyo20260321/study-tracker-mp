@@ -6,14 +6,18 @@ Page({
     user: {},
     createdText: '',
     reportCount: 0,
-    stats: { level: 1, xp: 27, level_name: '蜜蜂学徒', xp_pct: 27, streak: 0, remaining: 5 },
+    stats: { level: 1, xp: 0, xp_max: 100, level_name: '蜜蜂学徒', xp_pct: 0, streak_current: 0 },
+    referral: { count: 0, total_xp_earned: 0 },
     menus: [
-      { key: 'badges',  icon: '🏅', name: '我的徽章', sub: '已获得 0 / 12' },
       { key: 'invite',  icon: '🎁', name: '邀请有礼', sub: '拉新得免费次数' },
       { key: 'msgs',    icon: '📩', name: '消息中心', sub: '' },
       { key: 'setting', icon: '⚙️', name: '设置', sub: '' },
       { key: 'help',    icon: '❓', name: '帮助 / 反馈', sub: '' },
     ],
+    badgeCount: 0,
+    wrongCount: 0,
+    showBadgeModal: false,
+    allBadges: [],
   },
 
   onShow() { this.refresh(); },
@@ -24,24 +28,39 @@ Page({
       return;
     }
     try {
-      const me = await api.me();
-      const list = await api.reports();
-      const reportCount = list.length;
-      const xp = 50 * reportCount + 27;
-      const level = Math.floor(xp / 100) + 1;
-      const xp_in_level = xp - (level - 1) * 100;
-      const LEVEL_NAMES = ['', '蜜蜂学徒', '蜜蜂学徒', '蜜蜂学徒', '蜜蜂学徒', '蜜蜂学徒', '工蜂'];
+      const [me, list, statsRaw, referralData, badgesData, wrongData] = await Promise.all([
+        api.me(),
+        api.reports(),
+        api.statsMe(),
+        api.referralsMy().catch(() => ({ count: 0, total_xp_earned: 0 })),
+        api.badgesMe().catch(() => ({ earned: [], all: [] })),
+        api.wrongQuestions().catch(() => []),
+      ]);
+
+      const xp_pct = statsRaw.xp_max > 0
+        ? Math.round((statsRaw.xp / statsRaw.xp_max) * 100)
+        : 0;
+
+      const earnedSet = new Set((badgesData.earned || []).map((b) => b.type));
+      const allBadges = (badgesData.all || []).map((b) => ({ ...b, earned: earnedSet.has(b.type) }));
+      app.globalData.user = me;
+
       this.setData({
         user: me,
         createdText: new Date(me.created_at * 1000).toLocaleDateString(),
-        reportCount,
+        reportCount: list.length,
+        referral: { count: referralData.count, total_xp_earned: referralData.total_xp_earned },
         stats: {
-          level, xp: xp_in_level,
-          level_name: LEVEL_NAMES[level] || '蜂王',
-          xp_pct: Math.round(xp_in_level / 100 * 100),
-          streak: Math.min(reportCount, 7),
-          remaining: Math.max(0, 5 - reportCount),
+          level: statsRaw.level,
+          xp: statsRaw.xp,
+          xp_max: statsRaw.xp_max,
+          level_name: statsRaw.level_band || '蜜蜂学徒',
+          xp_pct,
+          streak_current: statsRaw.streak_current,
         },
+        badgeCount: badgesData.earned?.length ?? 0,
+        wrongCount: wrongData.length,
+        allBadges,
       });
     } catch (err) {
       console.error(err);
@@ -51,12 +70,26 @@ Page({
   onMenu(e) {
     const k = e.currentTarget.dataset.key;
     if (k === 'invite') {
-      wx.showShareMenu({ withShareTicket: true });
-      wx.showToast({ title: '邀请功能 V1 上线', icon: 'none' });
+      this.onInvite();
     } else {
       wx.showToast({ title: '功能开发中', icon: 'none' });
     }
   },
+
+  onInvite() {
+    const userId = app.globalData.user?.userId;
+    if (!userId) return;
+    wx.showShareMenu({ withShareTicket: true, menus: ['shareAppMessage'] });
+    wx.shareAppMessage({
+      title: '🎁 邀请好友, 一起冲连击',
+      path: `/pages/home/home?ref=${userId}`,
+    });
+  },
+
+  showBadges() { this.setData({ showBadgeModal: true }); },
+  closeBadges() { this.setData({ showBadgeModal: false }); },
+  goWrongQuest() { wx.navigateTo({ url: '/pages/wrong-quest/wrong-quest' }); },
+  goLeaderboard() { wx.navigateTo({ url: '/pages/leaderboard/leaderboard' }); },
 
   goPay()    { wx.navigateTo({ url: '/pages/pay/pay' }); },
   goProfile(){ wx.navigateTo({ url: '/pages/profile/profile' }); },

@@ -97,4 +97,21 @@ module.exports = {
   // V0.6 stats
   statsMe: () => request({ url: '/api/stats/me' }),
   statsOnboarding: (level_band, goal) => request({ url: '/api/stats/onboarding', method: 'PUT', data: { level_band, goal } }),
+
+
+
+  // V0.8 P3 recommendations
+  recommendations: (reportId) => request({ url: `/api/recommendations?from=report&report_id=${encodeURIComponent(reportId)}` }),
+
+  // V0.8 P4 referrals
+  referralsTrack: (ref) => request({ url: '/api/referrals/track', method: 'POST', data: { ref } }),
+  referralsMy: () => request({ url: '/api/referrals/my' }),
+
+
+  // V0.8 P5 growth
+  badgesMe: () => request({ url: '/api/badges/me' }),
+  wrongQuestions: () => request({ url: '/api/wrong-questions' }),
+  clearWrong: (q_id) => request({ url: '/api/wrong-questions/clear', method: 'POST', data: { q_id } }),
+  leaderboard: (city, grade) => request({ url: `/api/leaderboard?city=${encodeURIComponent(city || '')}&grade=${encodeURIComponent(grade || '')}` }),
+
 };

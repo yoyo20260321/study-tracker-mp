@@ -1,25 +1,9 @@
 const api = require('../../utils/api.js');
 const app = getApp();
 
-// V0 等级 / streak 等数据后端还没有, 本地 mock; 后续接 /api/auth/me/stats
-function mockStats(reportCount) {
-  const xp = 50 * reportCount + 27;
-  const level = Math.floor(xp / 100) + 1;
-  const xp_in_level = xp - (level - 1) * 100;
-  const xp_max = level * 100;
-  const LEVEL_NAMES = ['', '蜜蜂学徒', '蜜蜂学徒', '蜜蜂学徒', '蜜蜂学徒', '蜜蜂学徒', '工蜂', '工蜂', '工蜂', '工蜂', '工蜂', '巡蜂'];
-  return {
-    level, xp: xp_in_level, xp_max: 100,
-    level_name: LEVEL_NAMES[level] || '蜂王',
-    xp_pct: Math.round(xp_in_level / 100 * 100),
-    streak: Math.min(reportCount, 7),
-    remaining: Math.max(0, 5 - reportCount),
-  };
-}
-
 Page({
   data: {
-    stats: { level: 1, xp: 0, xp_max: 100, level_name: '蜜蜂学徒', xp_pct: 0, streak: 0, remaining: 5 },
+    stats: { level: 1, xp: 0, xp_max: 100, level_name: '蜜蜂学徒', xp_pct: 0, streak_current: 0, today_lesson_count: 0 },
     weaknesses: [],
     history: [],
   },
@@ -38,7 +22,22 @@ Page({
       return;
     }
     try {
-      const list = await api.reports();
+      const [statsRaw, list] = await Promise.all([api.statsMe(), api.reports()]);
+
+      const xp_pct = statsRaw.xp_max > 0
+        ? Math.round((statsRaw.xp / statsRaw.xp_max) * 100)
+        : 0;
+
+      const stats = {
+        level: statsRaw.level,
+        xp: statsRaw.xp,
+        xp_max: statsRaw.xp_max,
+        level_name: statsRaw.level_band || '蜜蜂学徒',
+        xp_pct,
+        streak_current: statsRaw.streak_current,
+        today_lesson_count: statsRaw.today_lesson_count || 0,
+      };
+
       const recent = (list || []).slice(0, 5);
       const history = recent.map(r => {
         const d = new Date(r.created_at * 1000);
@@ -46,7 +45,6 @@ Page({
         return { date: `${d.getMonth() + 1}/${d.getDate()}`, score };
       }).reverse();
 
-      // weakness aggregation (按 title 频次)
       const wCount = new Map();
       list.slice(0, 5).forEach((r, i) => {
         (r.report?.weaknesses || []).forEach(w => {
@@ -60,16 +58,13 @@ Page({
       });
       const weaknesses = [...wCount.values()].sort((a, b) => b.count - a.count).slice(0, 3);
 
-      this.setData({
-        stats: mockStats(list.length),
-        weaknesses,
-        history,
-      });
+      this.setData({ stats, weaknesses, history });
     } catch (err) {
       console.error('home refresh fail:', err);
     }
   },
 
-  goShoot() { wx.navigateTo({ url: '/pages/shoot/shoot' }); },
-  goPay()   { wx.navigateTo({ url: '/pages/pay/pay' }); },
+  goLesson() { wx.switchTab({ url: '/pages/lesson/topics/topics' }); },
+  goShoot()  { wx.navigateTo({ url: '/pages/shoot/shoot' }); },
+  goPay()    { wx.navigateTo({ url: '/pages/pay/pay' }); },
 });

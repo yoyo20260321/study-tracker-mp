@@ -74,6 +74,31 @@
     <view class="r-body">{{report.real_problem}}</view>
   </view>
 
+  <!-- AI 推荐课程 -->
+  <view class="card" wx:if="{{recommendations.length > 0}}">
+    <view class="row section-head">
+      <text>🎯 AI 给你定制的练习</text>
+      <text class="hint">{{recommendations.length}} 个课程</text>
+    </view>
+    <view class="rec-list">
+      <view
+        class="rec-card"
+        wx:for="{{recommendations}}"
+        wx:key="topic_id"
+        bindtap="goTopic"
+        data-topic-id="{{item.topic_id}}"
+        style="border-left: 6rpx solid {{item.color}};"
+      >
+        <view class="rec-icon">{{item.icon}}</view>
+        <view class="rec-info">
+          <view class="rec-name">{{item.name}}</view>
+          <view class="rec-reason">{{item.reason}}</view>
+        </view>
+        <view class="rec-arrow">›</view>
+      </view>
+    </view>
+  </view>
+
   <!-- 操作 -->
   <view class="actions">
     <button class="btn-share" open-type="share">📤 分享报告</button>

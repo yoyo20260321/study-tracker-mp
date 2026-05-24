@@ -1,0 +1,30 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty">加载中...</view>
+
+  <view wx:elif="{{!enough}}" class="empty-state">
+    <text class="empty-icon">🏆</text>
+    <text class="empty-msg">{{message}}</text>
+    <text class="empty-hint">继续完成课程，积累更多数据！</text>
+  </view>
+
+  <view wx:else>
+    <!-- 我的排名 -->
+    <view wx:if="{{me}}" class="me-card">
+      <text class="me-label">我的排名</text>
+      <text class="me-rank"># {{me.rank}}</text>
+      <text class="me-xp">⚡ {{me.xp}} XP</text>
+    </view>
+
+    <!-- 排行榜列表 -->
+    <view class="list-header">
+      <text>全市 TOP {{top.length}}</text>
+    </view>
+    <view class="row-item {{item.is_me ? 'highlight' : ''}}" wx:for="{{top}}" wx:key="rank">
+      <text class="rank-num">{{item.rank <= 3 ? medals[item.rank - 1] : item.rank}}</text>
+      <text class="phone flex-1">👤 {{item.phone_masked}}</text>
+      <text class="lv">Lv.{{item.level}}</text>
+      <text class="streak">🔥{{item.streak}}</text>
+      <text class="xp">⚡{{item.xp}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,36 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty">加载中...</view>
+  <view wx:elif="{{list.length === 0}}" class="empty">
+    <text>🎉 暂无错题，继续加油！</text>
+  </view>
+
+  <view wx:else>
+    <view class="count-bar">共 {{list.length}} 道待复习</view>
+    <view class="card" wx:for="{{list}}" wx:key="q_id" bindtap="showDetail" data-idx="{{index}}">
+      <view class="stem">{{item.stem}}</view>
+      <view class="row meta">
+        <text class="wrong-count">错误 {{item.wrong_count}} 次</text>
+        <text class="last-time">{{item.last_time}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 弹窗详情 -->
+  <view wx:if="{{detail}}" class="modal-mask" catchtap="closeDetail">
+    <view class="modal" catchtap="">
+      <view class="modal-stem">{{detail.stem}}</view>
+      <view wx:if="{{detail.options}}" class="options">
+        <view wx:for="{{detail.options}}" wx:key="index" wx:for-index="oi" class="opt">
+          <text class="opt-label">{{labels[oi]}}.</text> {{item}}
+        </view>
+      </view>
+      <view class="answer-block">
+        <text class="answer-label">正确答案：</text>
+        <text class="answer-val">{{detail.answer}}</text>
+      </view>
+      <view wx:if="{{detail.explanation}}" class="explanation">{{detail.explanation}}</view>
+      <button class="btn-clear" bindtap="clearAndClose">✅ 已掌握，清除</button>
+      <button class="btn-cancel" bindtap="closeDetail">关闭</button>
+    </view>
+  </view>
+</view>

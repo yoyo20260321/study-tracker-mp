@@ -14,5 +14,9 @@ App({
     if (token) this.globalData.token = token;
     if (user) this.globalData.user = user;
     console.log('[蜂学] onLaunch, token=', !!token);
+
+    const opts = wx.getLaunchOptionsSync();
+    const ref = opts?.query?.ref;
+    if (ref) wx.setStorageSync('pending_ref', ref);
   },
 });

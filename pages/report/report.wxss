@@ -52,6 +52,17 @@
 .r-tag { font-size: 20rpx; font-weight: 700; color: #B45309; letter-spacing: 2rpx; margin-bottom: 8rpx; }
 .r-body { font-size: 26rpx; color: #B45309; font-weight: 500; line-height: 1.7; }
 
+.rec-list { display: flex; flex-direction: column; gap: 16rpx; }
+.rec-card {
+  display: flex; align-items: center; gap: 20rpx;
+  background: #FAFAF8; border-radius: 16rpx; padding: 24rpx 20rpx;
+}
+.rec-icon { font-size: 44rpx; flex-shrink: 0; }
+.rec-info { flex: 1; min-width: 0; }
+.rec-name { font-size: 28rpx; font-weight: 600; color: #333; }
+.rec-reason { font-size: 22rpx; color: #888; margin-top: 6rpx; line-height: 1.5; }
+.rec-arrow { font-size: 36rpx; color: #CCC; flex-shrink: 0; }
+
 .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 16rpx; margin-top: 24rpx; }
 .btn-share, .btn-chat {
   color: #fff; border: none; padding: 24rpx 0; border-radius: 20rpx;

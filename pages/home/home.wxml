@@ -1,6 +1,6 @@
 <view class="page">
 
-  <!-- 状态栏: Lv + XP + streak + 剩余次数 -->
+  <!-- 状态栏: Lv + XP + streak + 今日小单元 -->
   <view class="card stats">
     <view class="row" style="gap: 20rpx;">
       <view class="lv-circle">L{{stats.level}}</view>
@@ -17,11 +17,11 @@
     <view class="row stat-row">
       <view class="stat-cell warm">
         <view class="emoji">🔥</view>
-        <view class="txt">连击 {{stats.streak}} 天</view>
+        <view class="txt">连击 {{stats.streak_current}} 天</view>
       </view>
       <view class="stat-cell sage">
-        <view class="emoji">🎫</view>
-        <view class="txt">剩 {{stats.remaining}} 次</view>
+        <view class="emoji">📖</view>
+        <view class="txt">今日 {{stats.today_lesson_count}} 关</view>
       </view>
       <view class="stat-cell honey" bindtap="goPay">
         <view class="emoji">💰</view>
@@ -30,12 +30,28 @@
     </view>
   </view>
 
-  <!-- 大拍卷 CTA -->
-  <view class="card cta">
-    <view class="bee-bob" style="font-size: 110rpx;">🐝</view>
-    <view class="cta-title">拍张试卷, 30 秒出诊断</view>
-    <view class="cta-sub">支持一年级到初三 · 数学</view>
-    <button class="btn-primary" style="margin-top: 32rpx;" bindtap="goShoot">📸 立刻拍卷</button>
+  <!-- 今日小单元 大 CTA -->
+  <view class="card cta-lesson" bindtap="goLesson">
+    <view class="cta-lesson-inner">
+      <view class="cta-lesson-icon">📚</view>
+      <view>
+        <view class="cta-lesson-title">今日小单元</view>
+        <view class="cta-lesson-sub">每日 5 关 · 稳步提分</view>
+      </view>
+    </view>
+    <view class="cta-lesson-arrow">›</view>
+  </view>
+
+  <!-- 拍卷 小 CTA -->
+  <view class="card cta-shoot" bindtap="goShoot">
+    <view class="row" style="align-items: center; gap: 16rpx;">
+      <view style="font-size: 40rpx;">📸</view>
+      <view class="grow">
+        <view class="shoot-title">拍张试卷, 30 秒出诊断</view>
+        <view class="shoot-sub">支持一年级到初三 · 数学</view>
+      </view>
+      <view class="shoot-arrow">›</view>
+    </view>
   </view>
 
   <!-- 弱点聚合 -->

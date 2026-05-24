@@ -13,7 +13,9 @@
     "pages/history/history",
     "pages/me/me",
     "pages/profile/profile",
-    "pages/pay/pay"
+    "pages/pay/pay",
+    "pages/wrong-quest/wrong-quest",
+    "pages/leaderboard/leaderboard"
   ],
   "window": {
     "backgroundTextStyle": "dark",
