@@ -68,7 +68,13 @@ Page({
       // 接后端 PUT /api/stats/onboarding
       await api.statsOnboarding(this.data.form.band, this.data.form.goal);
       // 同步更新 profile 的 grade 字段
-      try { await api.updateProfile({ grade: this.data.form.grade }); } catch {}
+      try {
+        await api.updateProfile({ grade: this.data.form.grade });
+      } catch (profileErr) {
+        wx.showToast({ title: '年级保存失败，请稍后重试', icon: 'none', duration: 2000 });
+        this.setData({ saving: false });
+        return;
+      }
       // 本地持久化引导完成标记
       wx.setStorageSync('onboarding_done', true);
       wx.setStorageSync('onboarding_form', this.data.form);

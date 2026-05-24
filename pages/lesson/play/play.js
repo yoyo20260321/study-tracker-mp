@@ -21,6 +21,7 @@ Page({
     explanation: '',
     results: [],
     loading: true,
+    isFinishing: false,
   },
 
   async onLoad(opt) {
@@ -88,6 +89,8 @@ Page({
   async nextQuestion() {
     const next = this.data.idx + 1;
     if (next >= this.data.total) {
+      if (this.data.isFinishing) return;
+      this.setData({ isFinishing: true });
       // 通关 → finish
       try {
         const fin = await api.lessonFinish(this.data.sessionId, this.data.results);
@@ -95,6 +98,7 @@ Page({
           url: `/pages/lesson/result/result?topic=${this.data.topicId}&correct=${fin.correct}&total=${fin.total}&xp=${fin.xp_earned}&streak=${fin.stats.streak_current}`,
         });
       } catch (err) {
+        this.setData({ isFinishing: false });
         wx.showToast({ title: '结算失败: ' + err.message, icon: 'none' });
       }
       return;
