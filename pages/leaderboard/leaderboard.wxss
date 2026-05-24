@@ -1,4 +1,8 @@
 .page { padding: 24rpx; background: #FFFBEB; min-height: 100vh; }
+
+.tab-bar { display: flex; background: #fff; border-radius: 20rpx; padding: 8rpx; margin-bottom: 24rpx; gap: 8rpx; }
+.tab-item { flex: 1; text-align: center; padding: 16rpx 0; border-radius: 14rpx; font-size: 28rpx; color: #92400E; }
+.tab-item.active { background: #B45309; color: #fff; font-weight: 700; }
 .empty { text-align: center; padding: 80rpx; color: #999; font-size: 28rpx; }
 .empty-state { display: flex; flex-direction: column; align-items: center; padding: 80rpx 40rpx; }
 .empty-icon { font-size: 80rpx; margin-bottom: 24rpx; }

@@ -50,6 +50,7 @@ Page({
       const earnedSet = new Set((badgesData.earned || []).map((b) => b.type));
       const allBadges = (badgesData.all || []).map((b) => ({ ...b, earned: earnedSet.has(b.type) }));
       app.globalData.user = me;
+      app.globalData.stats = statsRaw;
 
       this.setData({
         user: me,
@@ -83,13 +84,7 @@ Page({
   },
 
   onInvite() {
-    const userId = app.globalData.user?.userId;
-    if (!userId) return;
-    wx.showShareMenu({ withShareTicket: true, menus: ['shareAppMessage'] });
-    wx.shareAppMessage({
-      title: '🎁 邀请好友, 一起冲连击',
-      path: `/pages/home/home?ref=${userId}`,
-    });
+    wx.navigateTo({ url: '/pages/share/share' });
   },
 
   showBadges() { this.setData({ showBadgeModal: true }); },

@@ -1,0 +1,16 @@
+<view class="page">
+  <canvas canvas-id="posterCanvas" class="poster-canvas"></canvas>
+
+  <view wx:if="{{posterImg}}" class="poster-preview">
+    <image src="{{posterImg}}" mode="widthFix" class="preview-img" />
+  </view>
+
+  <view class="actions">
+    <button class="btn btn-primary" bindtap="savePoster">
+      保存到相册
+    </button>
+    <button class="btn btn-secondary" open-type="share">
+      转发给好友
+    </button>
+  </view>
+</view>

@@ -1,4 +1,14 @@
 <view class="page">
+  <!-- Tab 切换 -->
+  <view class="tab-bar">
+    <view class="tab-item {{period === 'all' ? 'active' : ''}}" data-period="all" bindtap="switchTab">
+      <text>总榜</text>
+    </view>
+    <view class="tab-item {{period === 'week' ? 'active' : ''}}" data-period="week" bindtap="switchTab">
+      <text>本周</text>
+    </view>
+  </view>
+
   <view wx:if="{{loading}}" class="empty">加载中...</view>
 
   <view wx:elif="{{!enough}}" class="empty-state">
@@ -12,12 +22,12 @@
     <view wx:if="{{me}}" class="me-card">
       <text class="me-label">我的排名</text>
       <text class="me-rank"># {{me.rank}}</text>
-      <text class="me-xp">⚡ {{me.xp}} XP</text>
+      <text class="me-xp">⚡ {{me.xp}} {{period === 'week' ? '本周XP' : 'XP'}}</text>
     </view>
 
     <!-- 排行榜列表 -->
     <view class="list-header">
-      <text>全市 TOP {{top.length}}</text>
+      <text>{{period === 'week' ? '本周' : '总榜'}} TOP {{top.length}}</text>
     </view>
     <view class="row-item {{item.is_me ? 'highlight' : ''}}" wx:for="{{top}}" wx:key="rank">
       <text class="rank-num">{{item.rank <= 3 ? medals[item.rank - 1] : item.rank}}</text>

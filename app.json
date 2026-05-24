@@ -15,7 +15,8 @@
     "pages/profile/profile",
     "pages/pay/pay",
     "pages/wrong-quest/wrong-quest",
-    "pages/leaderboard/leaderboard"
+    "pages/leaderboard/leaderboard",
+    "pages/share/share"
   ],
   "window": {
     "backgroundTextStyle": "dark",

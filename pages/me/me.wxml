@@ -54,7 +54,7 @@
     <view class="growth-row" bindtap="showBadges">
       <text class="gr-icon">🏅</text>
       <text class="gr-name flex-1">我的徽章</text>
-      <text class="gr-sub">已得 {{badgeCount}}/8</text>
+      <text class="gr-sub">已得 {{badgeCount}}/13</text>
       <text class="gr-arr">›</text>
     </view>
     <view class="growth-row" bindtap="goWrongQuest">

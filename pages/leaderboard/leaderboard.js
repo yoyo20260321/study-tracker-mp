@@ -9,15 +9,23 @@ Page({
     top: [],
     me: null,
     medals: ['🥇', '🥈', '🥉'],
+    period: 'all',
   },
 
   onShow() { this.load(); },
+
+  switchTab(e) {
+    const period = e.currentTarget.dataset.period;
+    if (period === this.data.period) return;
+    this.setData({ period });
+    this.load();
+  },
 
   async load() {
     this.setData({ loading: true });
     try {
       const user = app.globalData.user || {};
-      const result = await api.leaderboard(user.city || '', user.grade || '');
+      const result = await api.leaderboard(user.city || '', user.grade || '', this.data.period);
       if (!result.enough_data) {
         this.setData({ loading: false, enough: false, message: result.message });
         return;

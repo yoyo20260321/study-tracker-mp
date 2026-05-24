@@ -1,0 +1,11 @@
+.page { padding: 40rpx; background: #FFFBEB; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+
+.poster-canvas { position: fixed; left: -9999rpx; top: -9999rpx; }
+
+.poster-preview { width: 600rpx; margin-bottom: 40rpx; box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.1); border-radius: 20rpx; overflow: hidden; }
+.preview-img { width: 100%; display: block; }
+
+.actions { width: 100%; display: flex; flex-direction: column; gap: 24rpx; }
+.btn { border-radius: 16rpx; font-size: 32rpx; font-weight: 600; padding: 28rpx 0; }
+.btn-primary { background: #B45309; color: #fff; }
+.btn-secondary { background: #fff; color: #B45309; border: 2rpx solid #B45309; }

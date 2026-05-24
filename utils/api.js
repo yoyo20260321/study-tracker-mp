@@ -112,6 +112,6 @@ module.exports = {
   badgesMe: () => request({ url: '/api/badges/me' }),
   wrongQuestions: () => request({ url: '/api/wrong-questions' }),
   clearWrong: (q_id) => request({ url: '/api/wrong-questions/clear', method: 'POST', data: { q_id } }),
-  leaderboard: (city, grade) => request({ url: `/api/leaderboard?city=${encodeURIComponent(city || '')}&grade=${encodeURIComponent(grade || '')}` }),
+  leaderboard: (city, grade, period) => request({ url: `/api/leaderboard?city=${encodeURIComponent(city || '')}&grade=${encodeURIComponent(grade || '')}${period === 'week' ? '&period=week' : ''}` }),
 
 };
