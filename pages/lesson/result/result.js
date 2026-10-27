@@ -6,11 +6,12 @@ Page({
     const total = Number(opt.total || 5);
     const xp = Number(opt.xp || 0);
     const streak = Number(opt.streak || 0);
-    this.setData({ correct, total, xp, streak, perfect: correct === total });
+    const topic = opt.topic || 'g6-fraction-add-sub';
+    this.setData({ correct, total, xp, streak, perfect: correct === total, topic });
   },
 
   again() {
-    wx.redirectTo({ url: '/pages/lesson/play/play?topic=g6-fraction-add-sub' });
+    wx.redirectTo({ url: `/pages/lesson/play/play?topic=${encodeURIComponent(this.data.topic)}` });
   },
 
   goBack() {
