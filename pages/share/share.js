@@ -49,7 +49,8 @@ Page({
     // 用户信息
     ctx.fillStyle = '#1F2937';
     ctx.font = 'bold 36px sans-serif';
-    ctx.fillText(user.phone || '蜂学学员', width / 2, 340);
+    const displayName = String(user.phone || '蜂学学员').replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2');
+    ctx.fillText(displayName, width / 2, 340);
 
     ctx.font = '28px sans-serif';
     ctx.fillStyle = '#6B7280';
